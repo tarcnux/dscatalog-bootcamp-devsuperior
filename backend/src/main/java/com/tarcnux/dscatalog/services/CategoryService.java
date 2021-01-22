@@ -1,6 +1,7 @@
 package com.tarcnux.dscatalog.services;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tarcnux.dscatalog.dto.CategoryDTO;
 import com.tarcnux.dscatalog.entities.Category;
 import com.tarcnux.dscatalog.repositories.CategoryRepository;
+import com.tarcnux.dscatalog.services.exceptions.EntityNotFoundException;
 
 @Service
 public class CategoryService {
@@ -29,5 +31,14 @@ public class CategoryService {
 		//It's also possible return directly
 		// return list.stream().map(x -> new CategoryDTO(x)).collect(Collectors.toList());
 		
+	}
+
+	@Transactional(readOnly = true)
+	public CategoryDTO findById(Long id) {
+		Optional<Category> objOptional = repository.findById(id);
+		//Category entity = objOptional.get();
+		//Handling the exception
+		Category entity = objOptional.orElseThrow(() -> new EntityNotFoundException("Entity NOT found"));
+		return new CategoryDTO(entity);
 	}
 }
