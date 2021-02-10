@@ -1,12 +1,13 @@
 import React from 'react';
 import './core/assets/styles/custom.scss';
 import './app.scss'
+import Navbar from './core/components/Navbar';
 
 const App = () => {
     
 
     return (
-        <h1>Alo HA</h1>
+        <Navbar />
     );
 }
 
