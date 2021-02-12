@@ -3,9 +3,14 @@ import { Link } from 'react-router-dom';
 import { ProductResponse } from '../../core/types/Product';
 import { makeRequest } from '../../core/utils/requests';
 import ProductCard from './Components/ProductCard';
+import ProductCardLoader from './Components/ProductCardLoader';
 import './styles.scss';
 
 const Catalog = () => {
+
+    //Estado do carregamento da página
+    const [isLoading, setIsloading] = useState(false);
+
     //quando o componente iniciar, buscar a lista de produtos
     //quando a lista de produtos estiver disponível,
     //popular um estado do componente, e listar os produtos dinamicamente
@@ -33,9 +38,14 @@ const Catalog = () => {
             direction: 'DESC',
             orderBy: 'id',
         }
-
+        //Iniciar o Loader
+        setIsloading(true);
         makeRequest({ url: '/products', params })
-        .then(response => setProductsResponse(response.data));
+        .then(response => setProductsResponse(response.data))
+        .finally(() => {
+            //Finalizar o loader
+            setIsloading(false);
+        });
 
     }, []);//É chamado apenas quando o componente iniciar
 
@@ -43,11 +53,13 @@ const Catalog = () => {
         <div className="catalog-container">
             <h1 className="catalog-title">Catalogo de produtos</h1>
             <div className="catalog-products border-radius-10">
-                {productsResponse?.content.map(product => (
-                    <Link to={`/products/${product.id}`} key={product.id}>
-                        <ProductCard product={product}/>
-                    </Link>
-                ))}
+                {isLoading ? <ProductCardLoader /> : (
+                    productsResponse?.content.map(product => (
+                        <Link to={`/products/${product.id}`} key={product.id}>
+                            <ProductCard product={product}/>
+                        </Link>
+                    ))
+                )} 
             </div>
         </div>
     );
