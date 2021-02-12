@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
+import { ProductResponse } from '../../core/types/Product';
 import { makeRequest } from '../../core/utils/requests';
 import ProductCard from './Components/ProductCard';
 import './styles.scss';
@@ -8,6 +9,11 @@ const Catalog = () => {
     //quando o componente iniciar, buscar a lista de produtos
     //quando a lista de produtos estiver disponível,
     //popular um estado do componente, e listar os produtos dinamicamente
+    const [productsResponse, setProductsResponse] = useState<ProductResponse>();
+
+    console.log(productsResponse);
+
+    //quando o componente iniciar, buscar a lista de produtos
     useEffect(() => {
         console.log('Catalog: Componente de listagem de produtos iniciado.')
         //Limitações fetch API:
@@ -29,23 +35,19 @@ const Catalog = () => {
         }
 
         makeRequest({ url: '/products', params })
-        .then(response => console.log(response));
+        .then(response => setProductsResponse(response.data));
 
-    }, []);
+    }, []);//É chamado apenas quando o componente iniciar
 
     return (
         <div className="catalog-container">
             <h1 className="catalog-title">Catalogo de produtos</h1>
             <div className="catalog-products border-radius-10">
-                <Link to="/products/1"><ProductCard /></Link>
-                <Link to="/products/2"><ProductCard /></Link>
-                <Link to="/products/3"><ProductCard /></Link>
-                <Link to="/products/4"><ProductCard /></Link>
-                <Link to="/products/5"><ProductCard /></Link>
-                <Link to="/products/6"><ProductCard /></Link>
-                <Link to="/products/7"><ProductCard /></Link>
-                <Link to="/products/8"><ProductCard /></Link>
-                <Link to="/products/9"><ProductCard /></Link>
+                {productsResponse?.content.map(product => (
+                    <Link to="/products/1" key={product.id}>
+                        <ProductCard />
+                    </Link>
+                ))}
             </div>
         </div>
     );
