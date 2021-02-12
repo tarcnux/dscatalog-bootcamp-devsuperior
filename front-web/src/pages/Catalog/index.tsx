@@ -45,7 +45,7 @@ const Catalog = () => {
             <div className="catalog-products border-radius-10">
                 {productsResponse?.content.map(product => (
                     <Link to="/products/1" key={product.id}>
-                        <ProductCard />
+                        <ProductCard product={product}/>
                     </Link>
                 ))}
             </div>
