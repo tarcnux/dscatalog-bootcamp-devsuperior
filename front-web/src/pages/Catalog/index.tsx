@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom';
+import { makeRequest } from '../../core/utils/requests';
 import ProductCard from './Components/ProductCard';
 import './styles.scss';
 
@@ -9,9 +10,27 @@ const Catalog = () => {
     //popular um estado do componente, e listar os produtos dinamicamente
     useEffect(() => {
         console.log('Catalog: Componente de listagem de produtos iniciado.')
-        fetch('http://localhost:3000/products')
-        .then(response => response.json())
+        //Limitações fetch API:
+        // - Muito verboso
+        // - Não tem suporte nativo para ler progresso de upload de arquivos
+        // - Não tem suporte nativo para enviar query strings
+        /**
+         * fetch('http://localhost:3000/products') **Proxy**
+         * .then(response => response.json())
+         * .then(response => console.log(response));
+         */
+        //axios('http://localhost:3000/products')
+        
+        const params = {
+            page: 0,
+            linesPerPage: 12,
+            direction: 'DESC',
+            orderBy: 'id',
+        }
+
+        makeRequest({ url: '/products', params })
         .then(response => console.log(response));
+
     }, []);
 
     return (
