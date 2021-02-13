@@ -5,6 +5,7 @@ import { makeRequest } from 'core/utils/requests';
 import ProductCard from './Components/ProductCard';
 import ProductCardLoader from './Components/ContentLoaders/ProductCardLoader';
 import './styles.scss';
+import Pagination from 'core/components/Pagination';
 
 const Catalog = () => {
 
@@ -61,6 +62,7 @@ const Catalog = () => {
                     ))
                 )} 
             </div>
+            <Pagination />
         </div>
     );
 }
