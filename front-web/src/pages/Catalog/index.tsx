@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ProductResponse } from '../../core/types/Product';
 import { makeRequest } from '../../core/utils/requests';
 import ProductCard from './Components/ProductCard';
-import ProductCardLoader from './Components/ProductCardLoader';
+import ProductCardLoader from './Components/ContentLoaders/ProductCardLoader';
 import './styles.scss';
 
 const Catalog = () => {
@@ -16,11 +16,11 @@ const Catalog = () => {
     //popular um estado do componente, e listar os produtos dinamicamente
     const [productsResponse, setProductsResponse] = useState<ProductResponse>();
 
-    console.log(productsResponse);
+    //console.log(productsResponse);
 
     //quando o componente iniciar, buscar a lista de produtos
     useEffect(() => {
-        console.log('Catalog: Componente de listagem de produtos iniciado.')
+        //console.log('Catalog: Componente de listagem de produtos iniciado.')
         //Limitações fetch API:
         // - Muito verboso
         // - Não tem suporte nativo para ler progresso de upload de arquivos
@@ -35,7 +35,7 @@ const Catalog = () => {
         const params = {
             page: 0,
             linesPerPage: 12,
-            direction: 'DESC',
+            direction: 'ASC',
             orderBy: 'id',
         }
         //Iniciar o Loader
