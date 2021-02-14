@@ -9,6 +9,8 @@ import Pagination from 'core/components/Pagination';
 
 const Catalog = () => {
 
+    const [activePage, setActivePage] = useState(0);
+
     //Estado do carregamento da página
     const [isLoading, setIsloading] = useState(false);
 
@@ -34,7 +36,7 @@ const Catalog = () => {
         //axios('http://localhost:3000/products')
         
         const params = {
-            page: 0,
+            page: activePage,
             linesPerPage: 12,
             direction: 'ASC',
             orderBy: 'id',
@@ -48,7 +50,7 @@ const Catalog = () => {
             setIsloading(false);
         });
 
-    }, []);//É chamado apenas quando o componente iniciar
+    }, [activePage]);//É chamado quando o componente iniciar, e quando activePage mudar
 
     return (
         <div className="catalog-container">
@@ -62,7 +64,13 @@ const Catalog = () => {
                     ))
                 )} 
             </div>
-            <Pagination />
+            {productsResponse && (
+                <Pagination
+                    onChange={page => setActivePage(page)}
+                    totalPages={productsResponse.totalPages}
+                    activePage={activePage}
+                />
+            )}            
         </div>
     );
 }
