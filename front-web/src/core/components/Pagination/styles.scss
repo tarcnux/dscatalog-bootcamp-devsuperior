@@ -30,15 +30,23 @@
     transform: rotate(180deg);
     margin-right: 25px;
     color: #d0d0d0;
-    cursor: pointer;
+    pointer-events: none;
+
+    &.active {
+        color: #407Bff;
+        cursor: pointer;
+        pointer-events: all;
+    }
 }
 
 .pagination-next {
     margin-left: 15px;
     color: #d0d0d0;
-    cursor: pointer;
+    pointer-events: none;
 
     &.active {
         color: #407Bff;
+        cursor: pointer;
+        pointer-events: all;
     }
 }
