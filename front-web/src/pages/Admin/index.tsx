@@ -1,8 +1,10 @@
-import React from 'react'
+import React from 'react';
+import AdminNavbar from './components/AdminNavbar';
+import './styles.scss';
 
 const Admin = () => (
     <div>
-        <h1>Admin</h1>
+        <AdminNavbar />
     </div>
 );
 
