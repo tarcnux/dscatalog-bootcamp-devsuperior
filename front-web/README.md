@@ -1,18 +1,47 @@
-# Getting Started with Create React App
+# Catálogo de Produtos DevSuperior
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Front-end
 
-## Available Scripts
-
-In the project directory, you can run:
+Pasta front-web
 
 ### `yarn start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Rodando a apliacação no modo desenvolvimento.\
+Abrir [http://localhost:3000](http://localhost:3000) para ver no navegador.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+A página irá recarregar se você fizer edições.\
+Você também verá qualquer erro lint no console.
+
+# ROTAS DA APLICAÇÃO
+
+* [x] Feito : / :arrow_right: HOME
+
+## LISTAGEM
+* [x] Feito : /products :arrow_right: Listagem de produtos
+* [x] Feito : /products/productId :arrow_right: Listagem de um produto
+
+## CRUD de produtos
+* [ ] A fazer : /admin/products :arrow_right: Listagem de produtos
+* [ ] A fazer : /admin/products/create :arrow_right: Criação de produto
+* [ ] A fazer : /admin/products/:productId :arrow_right: Edição/Atualização de produto
+
+## CRUD de categorias
+* [ ] A fazer : /admin/categories :arrow_right: Listagem de categorias
+* [ ] A fazer : /admin/categories/create :arrow_right: Criação de categoria
+* [ ] A fazer : /admin/categories/:categoryId :arrow_right: Edição/Atualização de categoria
+
+## CRUD de usuários
+* [ ] A fazer : /admin/users :arrow_right: Listagem de usuários
+* [ ] A fazer : /admin/users/create :arrow_right: Criação de usuário
+* [ ] A fazer : /admin/users/:userId :arrow_right: Edição/Atualização de usuário
+
+## AUTENTICAÇÃO
+* [ ] A fazer : /admin/auth/login :arrow_right: Autenticar e entrar como administrador
+* [ ] A fazer : /admin/auth/register :arrow_right: Cadastrar um novo usuário
+* [ ] A fazer : /admin/auth/recover :arrow_right: Recuperar a senha de um usuário cadastrado
+
+![Rotas do Front-end](https://github.com/tarcnux/dscatalog-resources/blob/master/frontend-web/rotas.svg)
+
 
 ### `yarn test`
 
