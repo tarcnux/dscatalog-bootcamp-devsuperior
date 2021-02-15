@@ -21,9 +21,9 @@ Você também verá qualquer erro lint no console.
 * [x] Feito : /products/productId :arrow_right: Listagem de um produto
 
 ## CRUD de produtos
-* [ ] A fazer : /admin/products :arrow_right: Listagem de produtos
-* [ ] A fazer : /admin/products/create :arrow_right: Criação de produto
-* [ ] A fazer : /admin/products/:productId :arrow_right: Edição/Atualização de produto
+* [x] Apenas Rotas Feito : /admin/products :arrow_right: Listagem de produtos
+* [x] Apenas Rotas Feito : /admin/products/create :arrow_right: Criação de produto
+* [x] Apenas Rotas Feito : /admin/products/:productId :arrow_right: Edição/Atualização de produto
 
 ## CRUD de categorias
 * [ ] A fazer : /admin/categories :arrow_right: Listagem de categorias
