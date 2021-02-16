@@ -1,3 +1,4 @@
+import { makeRequest } from 'core/utils/requests';
 import React, { useState } from 'react';
 import BaseForm from '../../BaseForm';
 import './styles.scss';
@@ -6,17 +7,21 @@ type FormState = {
     name: string;
     price: string;
     category: string;
+    description: string;
 }
+
+type FormEvent = React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>;
 
 const Form = () => {
 
     const [formData, setFormData] = useState<FormState>({
         name: '',
         price: '',
-        category: '',
+        category: '1',
+        description: '',
     }); 
 
-    const handleOnChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const handleOnChange = (event: FormEvent) => {
         const name = event.target.name;
         const value = event.target.value;
         //console.log({name, value});
@@ -27,7 +32,19 @@ const Form = () => {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log(formData);
+        const payload = {
+            ...formData,
+            imgUrl: 'https://res.cloudinary.com/gametecgroup/image/upload/c_fit,f_auto,h_1000,w_1000/c_fit,g_south,l_watermark,o_50,w_250,x_5,y_5/console-xbox-one-x-1tb-white-white-new-576826_1',
+            categories: [{id: parseInt(formData.category)}]
+        }
+        //console.log(payload);
+        makeRequest({
+            url: '/products',
+            method: 'POST',
+            data: payload,
+        }).then(() => {
+            setFormData({name: '', category: '', price: '', description: ''});
+        });
     }
 
     return (
@@ -43,9 +60,9 @@ const Form = () => {
                         <select name="category"  value={formData.category}
                             className="form-control mb-4"
                             onChange={handleOnChange}>
-                                <option value="livros">Livros</option>
-                                <option value="computadores">Computadores</option>
-                                <option value="eletronicos">Eletrônicos</option>
+                                <option value="2">Livros</option>
+                                <option value="3">Computadores</option>
+                                <option value="1">Eletrônicos</option>
                             </select>
 
                     
@@ -54,6 +71,14 @@ const Form = () => {
                         name="price" value={formData.price}
                         placeholder="Preço do produto"/>
 
+                    </div>
+                    <div className="col-6">
+                        <textarea
+                            onChange={handleOnChange}
+                            name="description" 
+                            value={formData.description}
+                            className="form-control"
+                            id="" cols={30} rows={10} />
                     </div>
                 </div>
             </BaseForm>
