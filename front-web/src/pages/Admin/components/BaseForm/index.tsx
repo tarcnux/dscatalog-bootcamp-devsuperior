@@ -11,7 +11,7 @@ const BaseForm = ({ title, children }: Props) => {
 
     const history = useHistory();
     const handleCancel = () => {
-        history.goBack();
+        history.push('../'); //Voltar
     }
 
     return (

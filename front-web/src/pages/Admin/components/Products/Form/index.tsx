@@ -2,60 +2,62 @@ import React, { useState } from 'react';
 import BaseForm from '../../BaseForm';
 import './styles.scss';
 
+type FormState = {
+    name: string;
+    price: string;
+    category: string;
+}
+
 const Form = () => {
 
-    const [name, setName] = useState(''); //Nome do Produto
-    const [price, setPrice] = useState(''); //Preço do produto
-    const [category, setCategory] = useState('computadores'); //Categoria do Produto
+    const [formData, setFormData] = useState<FormState>({
+        name: '',
+        price: '',
+        category: '',
+    }); 
 
-    const handleOnChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setName(event.target.value);
+    const handleOnChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        const name = event.target.name;
+        const value = event.target.value;
+        //console.log({name, value});
+
+        setFormData(data => ({...data, [name]: value}));
+        
     }
 
-    const handleOnChangePrice = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setPrice(event.target.value);
-    }
-
-    const handleOnChangeCategory = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setCategory(event.target.value);
-    }
-
-    const handleClick = () => {
-        setName('devSuperior')
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        console.log(formData);
     }
 
     return (
-        <BaseForm title="cadastrar um produto">
-            <p className="my-5">
-                Nome: {name} <br />
-                Categoria: {category} <br />
-                Preço: {price} <br />
-            </p>
-            <button className="btn btn-primary btn-lg my-5" onClick={handleClick}>
-                Atualizar para "devsuperior"
-            </button>
-            <div className="row">
-                <div className="col-6">
-                    <input type="text" className="form-control mb-4"
-                    onChange={handleOnChangeName}
-                    value={name} placeholder="Nome do produto"/>
+        <form onSubmit={handleSubmit}>
+            <BaseForm title="cadastrar um produto">
+                <div className="row">
+                    <div className="col-6">
+                        <input type="text" className="form-control mb-4"
+                        onChange={handleOnChange}
+                        name="name" value={formData.name}
+                        placeholder="Nome do produto"/>
 
-                    <select value={category} 
-                        className="form-control mb-4"
-                        onChange={handleOnChangeCategory}>
-                            <option value="livros">Livros</option>
-                            <option value="computadores">Computadores</option>
-                            <option value="eletronicos">Eletrônicos</option>
-                        </select>
+                        <select name="category"  value={formData.category}
+                            className="form-control mb-4"
+                            onChange={handleOnChange}>
+                                <option value="livros">Livros</option>
+                                <option value="computadores">Computadores</option>
+                                <option value="eletronicos">Eletrônicos</option>
+                            </select>
 
-                
-                    <input type="text" className="form-control"
-                    onChange={handleOnChangePrice}
-                    value={price} placeholder="Preço do produto"/>
+                    
+                        <input type="text" className="form-control"
+                        onChange={handleOnChange}
+                        name="price" value={formData.price}
+                        placeholder="Preço do produto"/>
 
+                    </div>
                 </div>
-            </div>
-        </BaseForm>
+            </BaseForm>
+        </form>
     )
 }
 
