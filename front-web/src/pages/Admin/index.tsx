@@ -1,16 +1,16 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import AdminNavbar from './components/AdminNavbar';
-import AdminProducts from './components/AdminProducts';
+import Navbar from './components/Navbar';
+import Products from './components/Products';
 import './styles.scss';
 
 const Admin = () => (
     <div className="admin-container">
-        <AdminNavbar />
+        <Navbar />
         <div className="admin-content">
             <Switch>
                 <Route path="/admin/products">
-                    <AdminProducts />
+                    <Products />
                 </Route>
 
                 <Route path="/admin/categories">
